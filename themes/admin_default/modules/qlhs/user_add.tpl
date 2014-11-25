@@ -75,14 +75,6 @@
 					<td colspan="2"> {LANG.birthday} </td>
 					<td><input name="birthday" class="form-control datepicker" value="{DATA.birthday}" style="width: 90px;" maxlength="10" readonly="readonly" type="text" />
 				</tr>
-				<tr>
-					<td colspan="2"> {LANG.show_email} </td>
-					<td><input type="checkbox" name="view_mail" value="1"{DATA.view_mail} /></td>
-				</tr>
-				<tr>
-					<td style="vertical-align:top" colspan="2"> {LANG.sig} </td>
-					<td><textarea name="sig" class="form-control" cols="70" rows="5" style="width: 300px">{DATA.sig}</textarea></td>
-				</tr>
 				<!-- BEGIN: group -->
 				<tr>
 					<td style="vertical-align:top" colspan="2"> {LANG.in_group} </td>
