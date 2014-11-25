@@ -51,12 +51,12 @@
 				<tr>
 					<td > {LANG.firstname} </td>
 					<td style="width:10px"> (<span style="color:#FF0000">*</span>) </td>
-					<td><input class="form-control" type="text" value="{DATA.full_name}" name="first_name" style="width: 300px" /></td>
+					<td><input class="form-control required" type="text" value="{DATA.first_name}" name="first_name" style="width: 300px" /></td>
 				</tr>
 				<tr>
 					<td > {LANG.lastname} </td>
 					<td style="width:10px"> (<span style="color:#FF0000">*</span>) </td>
-					<td><input class="form-control" type="text" value="{DATA.last_name}" name="last_name" style="width: 300px" /></td>
+					<td><input class="form-control required" type="text" value="{DATA.last_name}" name="last_name" style="width: 300px" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"> {LANG.gender} </td>
@@ -89,64 +89,56 @@
 					</td>
 				</tr>
 				<!-- END: group -->
+				<!-- BEGIN: field -->
+						<!-- BEGIN: loop -->
+						<tr>
+							<td><strong>{FIELD.title}</strong>
+							<br>
+							<em>{FIELD.description}</em></td>
+							<td>
+							<!-- BEGIN: required -->
+							(<span style="color:#FF0000">*</span>)
+							<!-- END: required -->
+							</td>
+							<td>
+							<!-- BEGIN: textbox -->
+							<input class="form-control {FIELD.required}" type="text" name="custom_fields[{FIELD.field}]" value="{FIELD.value}" style="width: 300px" />
+							<!-- END: textbox -->
+							<!-- BEGIN: date -->
+							<input class="form-control datepicker {FIELD.required}" type="text" name="custom_fields[{FIELD.field}]" value="{FIELD.value}" style="width: 100px" />
+							<!-- END: date -->
+							<!-- BEGIN: textarea --><textarea style="width:300px" rows="5" cols="70" name="custom_fields[{FIELD.field}]">{FIELD.value}</textarea>
+							<!-- END: textarea -->
+							<!-- BEGIN: editor -->
+							{EDITOR}
+							<!-- END: editor -->
+							<!-- BEGIN: select -->
+							<select class="form-control" name="custom_fields[{FIELD.field}]">
+								<!-- BEGIN: loop -->
+								<option value="{FIELD_CHOICES.key}" {FIELD_CHOICES.selected}>{FIELD_CHOICES.value}</option>
+								<!-- END: loop -->
+							</select>
+							<!-- END: loopselect -->
+							<!-- BEGIN: radio -->
+							<label for="lb_{FIELD_CHOICES.id}"> <input type="radio" name="custom_fields[{FIELD.field}]" value="{FIELD_CHOICES.key}" id="lb_{FIELD_CHOICES.id}" {FIELD_CHOICES.checked}> {FIELD_CHOICES.value} </label>
+							<!-- END: radio -->
+							<!-- BEGIN: checkbox -->
+							<label for="lb_{FIELD_CHOICES.id}"> <input type="checkbox" name="custom_fields[{FIELD.field}][]" value="{FIELD_CHOICES.key}" id="lb_{FIELD_CHOICES.id}" {FIELD_CHOICES.checked}> {FIELD_CHOICES.value} </label>
+							<!-- END: checkbox -->
+							<!-- BEGIN: multiselect -->
+							<select class="form-control" name="custom_fields[{FIELD.field}][]" multiple="multiple">
+								<!-- BEGIN: loop -->
+								<option value="{FIELD_CHOICES.key}" {FIELD_CHOICES.selected}>{FIELD_CHOICES.value}</option>
+								<!-- END: loop -->
+							</select>
+							<!-- END: multiselect -->
+							</td>
+						</tr>
+						<!-- END: loop -->
+				<!-- END: field -->
 			</tbody>
 		</table>
-		<!-- BEGIN: field -->
-		<table class="table table-striped table-bordered table-hover">
-			<caption></caption>
-			<colgroup>
-				<col class="w300"/>
-				<col class="w20"/>
-			</colgroup>
-			<tbody>
-				<!-- BEGIN: loop -->
-				<tr>
-					<td><strong>{FIELD.title}</strong>
-					<br>
-					<em>{FIELD.description}</em></td>
-					<td>
-					<!-- BEGIN: required -->
-					(<span style="color:#FF0000">*</span>)
-					<!-- END: required -->
-					</td>
-					<td>
-					<!-- BEGIN: textbox -->
-					<input class="form-control {FIELD.required}" type="text" name="custom_fields[{FIELD.field}]" value="{FIELD.value}" style="width: 300px" />
-					<!-- END: textbox -->
-					<!-- BEGIN: date -->
-					<input class="form-control datepicker {FIELD.required}" type="text" name="custom_fields[{FIELD.field}]" value="{FIELD.value}" style="width: 100px" />
-					<!-- END: date -->
-					<!-- BEGIN: textarea --><textarea style="width:300px" rows="5" cols="70" name="custom_fields[{FIELD.field}]">{FIELD.value}</textarea>
-					<!-- END: textarea -->
-					<!-- BEGIN: editor -->
-					{EDITOR}
-					<!-- END: editor -->
-					<!-- BEGIN: select -->
-					<select class="form-control" name="custom_fields[{FIELD.field}]">
-						<!-- BEGIN: loop -->
-						<option value="{FIELD_CHOICES.key}" {FIELD_CHOICES.selected}>{FIELD_CHOICES.value}</option>
-						<!-- END: loop -->
-					</select>
-					<!-- END: loopselect -->
-					<!-- BEGIN: radio -->
-					<label for="lb_{FIELD_CHOICES.id}"> <input type="radio" name="custom_fields[{FIELD.field}]" value="{FIELD_CHOICES.key}" id="lb_{FIELD_CHOICES.id}" {FIELD_CHOICES.checked}> {FIELD_CHOICES.value} </label>
-					<!-- END: radio -->
-					<!-- BEGIN: checkbox -->
-					<label for="lb_{FIELD_CHOICES.id}"> <input type="checkbox" name="custom_fields[{FIELD.field}][]" value="{FIELD_CHOICES.key}" id="lb_{FIELD_CHOICES.id}" {FIELD_CHOICES.checked}> {FIELD_CHOICES.value} </label>
-					<!-- END: checkbox -->
-					<!-- BEGIN: multiselect -->
-					<select class="form-control" name="custom_fields[{FIELD.field}][]" multiple="multiple">
-						<!-- BEGIN: loop -->
-						<option value="{FIELD_CHOICES.key}" {FIELD_CHOICES.selected}>{FIELD_CHOICES.value}</option>
-						<!-- END: loop -->
-					</select>
-					<!-- END: multiselect -->
-					</td>
-				</tr>
-				<!-- END: loop -->
-			</tbody>
-		</table>
-		<!-- END: field -->
+		
 	</div>
 	<div class="text-center">
 		<input class="btn btn-primary" type="submit" name="confirm" value="{LANG.member_add}" />

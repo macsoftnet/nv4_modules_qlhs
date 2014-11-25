@@ -80,6 +80,7 @@ $lang_module['addquestion'] = 'Thêm câu hỏi bảo mật';
 $lang_module['savequestion'] = 'Sửa câu hỏi bảo mật';
 $lang_module['deletequestion'] = 'Xóa câu hỏi bảo mật';
 $lang_module['errornotitle'] = 'Lỗi bạn chưa nhập câu hỏi bảo mật';
+$lang_module['member_add'] = 'Thêm thành viên';
 $lang_module['errorChangeWeight'] = 'Lỗi! Không thay đổi được vị trí';
 $lang_module['quanli'] = 'Quản lí';
 $lang_module['quanli_ds'] = 'Quản lí danh sách học sinh';

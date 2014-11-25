@@ -52,7 +52,9 @@ if( $nv_Request->isset_request( 'confirm', 'post' ) )
 	$_user['password2'] = $nv_Request->get_title( 'password2', 'post', '', 0 );
 	$_user['question'] = nv_substr( $nv_Request->get_title( 'question', 'post', '', 1 ), 0, 255 );
 	$_user['answer'] = nv_substr( $nv_Request->get_title( 'answer', 'post', '', 1 ), 0, 255 );
-	$_user['full_name'] = nv_substr( $nv_Request->get_title( 'full_name', 'post', '', 1 ), 0, 255 );
+	$_user['first_name'] = nv_substr( $nv_Request->get_title( 'first_name', 'post', '', 1 ), 0, 255 );
+	$_user['last_name'] = nv_substr( $nv_Request->get_title( 'last_name', 'post', '', 1 ), 0, 255 );
+	$_user['full_name'] = $_user['first_name'] . " " . $_user['last_name'];
 	$_user['gender'] = nv_substr( $nv_Request->get_title( 'gender', 'post', '', 1 ), 0, 1 );
 	$_user['view_mail'] = $nv_Request->get_int( 'view_mail', 'post', 0 );
 	$_user['sig'] = $nv_Request->get_textarea( 'sig', '', NV_ALLOWED_HTML_TAGS );
@@ -232,8 +234,8 @@ if( $nv_Request->isset_request( 'confirm', 'post' ) )
 					}
 				}
 				$db->query( 'UPDATE ' . NV_GROUPS_GLOBALTABLE . ' SET numbers = numbers+1 WHERE group_id=4' );
-
-				Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
+				
+				Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=user'  );
 				exit();
 			}
 			$error = $lang_module['edit_add_error'];
@@ -327,7 +329,7 @@ else
 	{
 		foreach( $array_field_config as $row )
 		{
-			if( ( $row['show_register'] and $userid == 0 ) or $userid > 0 )
+			if( (  $userid == 0 ) or $userid > 0 )
 			{
 				if( $userid == 0 and empty( $custom_fields ) )
 				{
