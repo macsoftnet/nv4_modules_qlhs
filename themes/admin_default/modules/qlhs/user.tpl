@@ -1,265 +1,3 @@
-﻿<!-- BEGIN: add -->
-	<!-- BEGIN: is_forum -->
-	<div class="quote" style="width:780px;">
-		<blockquote class="error">
-			<p>
-				<span>{LANG.modforum}</span>
-			</p>
-		</blockquote>
-	</div>
-	<div class="clear"></div>
-	<!-- END: is_forum -->
-	<!-- BEGIN: error -->
-	<div style="width: 780px;" class="quote">
-		<blockquote class="error">
-			<p>
-				<span>{ERROR}</span>
-			</p>
-		</blockquote>
-	</div>
-	<div class="clear"></div>
-	<!-- END: error -->
-	<!-- BEGIN: add_user -->
-	<form id="form_add_user" action="{FORM_ACTION}" method="post" enctype="multipart/form-data">
-		<table class="tab1">
-			<tbody>
-				<tr>
-					<td>
-						{LANG.account}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" value="{DATA.username}" name="username" id="username_iavim" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td>
-						{LANG.email}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" value="{DATA.email}" name="email" id="email_iavim" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td>
-						{LANG.password}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" type="password" style="width: 150px" id="pass_iavim" name="password1" value="{DATA.password1}" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td>
-						{LANG.repassword}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" type="password" style="width: 150px" name="password2" value="{DATA.password2}" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td>
-						{LANG.question}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.question}" name="question" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td>
-						{LANG.answer}
-					</td>
-					<td style="width:10px">
-						(<span style="color:#FF0000">*</span>)
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.answer}" name="answer" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.name}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.full_name}" name="full_name" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td colspan="2">
-						{LANG.gender}
-					</td>
-					<td>
-						<select name="gender">
-							<!-- BEGIN: gender -->
-							<option value="{GENDER.key}"{GENDER.selected}>{GENDER.title}</option>
-							<!-- END: gender -->
-						</select>
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.avata}
-					</td>
-					<td>
-						<input type="file" name='photo' />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td colspan="2">
-						{LANG.birthday}
-					</td>
-					<td>
-						<input name="birthday" id="birthday" value="{DATA.birthday}" style="width: 90px;" maxlength="10" readonly="readonly" type="text" />
-						<img src="{NV_BASE_SITEURL}images/calendar.jpg" style="cursor: pointer; vertical-align: middle;" onclick="popCalendar.show(this, 'birthday', 'dd.mm.yyyy', true);" alt="" height="17" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.website}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.website}" name="website" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td colspan="2">
-						{LANG.address}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.location}" name="location" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.ym}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.yim}" name="yim" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td colspan="2">
-						{LANG.phone}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.telephone}" name="telephone" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.fax}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.fax}" name="fax" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td colspan="2">
-						{LANG.mobile}
-					</td>
-					<td>
-						<input class="txt" type="text" value="{DATA.mobile}" name="mobile" style="width:300px" />
-					</td>
-				</tr>
-			</tbody>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						{LANG.show_email}
-					</td>
-					<td>
-						<input type="checkbox" name="view_mail" value="1"{DATA.view_mail} />
-					</td>
-				</tr>
-			</tbody>
-			<tbody class="second">
-				<tr>
-					<td style="vertical-align:top" colspan="2">
-						{LANG.sig}
-					</td>
-					<td>
-						<textarea name="sig" cols="70" rows="5" style="width:300px">{DATA.sig}</textarea>
-					</td>
-				</tr>
-			</tbody>
-			<!-- BEGIN: group -->
-			<tbody>
-				<tr>
-					<td style="vertical-align:top" colspan="2">
-						{LANG.in_group}
-					</td>
-					<td>
-						<ul>
-							<!-- BEGIN: list -->
-							<li>
-								<input type="checkbox" value="{GROUP.id}" name="group[]"{GROUP.checked} />
-								<span>{GROUP.title}</span>
-							</li>
-							<!-- END: list -->
-						</ul>
-					</td>
-				</tr>
-			</tbody>
-			<!-- END: group -->
-			<tbody>
-				<tr>
-					<td colspan="3">
-						<input type="submit" name="confirm" value="{LANG.member_add}" />
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-	<script type="text/javascript">
-	//<![CDATA[
-	document.getElementById('form_add_user').setAttribute("autocomplete", "off");
-	//]]>
-	</script>
-	<!-- END: add_user -->
-<!-- END: add -->
 <!-- BEGIN: list -->
 
 <!-- END: list -->
@@ -328,8 +66,113 @@
 	
 <!-- END: main -->
 <!-- BEGIN: hocsinh -->
-code trang hoc sinh
-
+	<div id="users">
+		<!-- BEGIN: is_forum -->
+		<div class="alert alert-warning">{LANG.modforum}</div>
+		<!-- END: is_forum -->
+		<div style="padding-top:10px;">
+			<form class="form-inline" action="{FORM_ACTION}" method="get">
+				<input name="{NV_NAME_VARIABLE}" type="hidden" value="{MODULE_NAME}" />
+				<span><strong>{LANG.search_type}:</strong></span>
+				<select class="form-control" name="method" id="f_method">
+					<option value="">---</option>
+					<!-- BEGIN: method -->
+					<option value="{METHODS.key}"{METHODS.selected}>{METHODS.value}</option>
+					<!-- END: method -->
+				</select>
+				<input class="form-control" type="text" name="value" id="f_value" value="{SEARCH_VALUE}" />
+				<select class="form-control" name="usactive">
+					<!-- BEGIN: usactive -->
+					<option value="{USACTIVE.key}"{USACTIVE.selected}>{USACTIVE.value}</option>
+					<!-- END: usactive -->
+				</select>
+				<input class="btn btn-primary" name="search" type="submit" value="{LANG.submit}" />
+				<p>
+					{LANG.search_note}
+				</p>
+			</form>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<caption><em class="fa fa-file-text-o">&nbsp;</em>{TABLE_CAPTION}</caption>
+				<thead>
+					<tr>
+						<!-- BEGIN: head_td -->
+						<th><a href="{HEAD_TD.href}">{HEAD_TD.title}</a></th>
+						<!-- END: head_td -->
+						<td class="text-center"><strong>{LANG.memberlist_active}</th>
+						<th>{LANG.funcs}</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="7">
+						<!-- BEGIN: exportfile -->
+						<input type="button" class="btn btn-primary" value="{LANG.export}" name="data_export"/>
+						<!-- END: exportfile -->
+						<!-- BEGIN: generate_page -->
+						{GENERATE_PAGE}
+						<!-- END: generate_page -->
+						</td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<!-- BEGIN: xusers -->
+					<tr>
+						<td> {CONTENT_TD.userid} </td>
+						<td>
+						<!-- BEGIN: is_admin -->
+						<img style="vertical-align:middle;" alt="{CONTENT_TD.level}" src="{NV_BASE_SITEURL}themes/{NV_ADMIN_THEME}/images/{CONTENT_TD.img}.png" width="38" height="18" />
+						<!-- END: is_admin -->
+						{CONTENT_TD.username} </td>
+						<td> {CONTENT_TD.full_name} </td>
+						<td><a href="mailto:{CONTENT_TD.email}">{CONTENT_TD.email}</a></td>
+						<td> {CONTENT_TD.regdate} </td>
+						<td class="text-center"><input type="checkbox" name="active" id="change_status_{CONTENT_TD.userid}" value="{CONTENT_TD.userid}"{CONTENT_TD.checked}{CONTENT_TD.disabled} /></td>
+						<td style="white-space: nowrap">
+						<!-- BEGIN: edit -->
+						&nbsp;&nbsp; <em class="fa fa-edit fa-lg">&nbsp;</em> <a href="{EDIT_URL}">{LANG.memberlist_edit}</a>
+						<!-- END: edit -->
+						<!-- BEGIN: del -->
+						&nbsp;&nbsp; <em class="fa fa-trash-o fa-lg">&nbsp;</em> <a href="javascript:void(0);" onclick="nv_row_del({CONTENT_TD.userid});">{LANG.delete}</a>
+						<!-- END: del -->
+						</td>
+					</tr>
+					<!-- END: xusers -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function nv_data_export(set_export) {
+			$.ajax({
+				type : "POST",
+				url : "index.php?" + nv_name_variable + "=" + nv_module_name + "&" + nv_fc_variable + "=export&nocache=" + new Date().getTime(),
+				data : "step=1&set_export=" + set_export + "&method=" + $("select[name=method]").val() + "&value=" + $("input[name=value]").val() + "&usactive=" + $("select[name=usactive]").val(),
+				success : function(response) {
+					if (response == "OK_GETFILE") {
+						nv_data_export(0);
+					} else if (response == "OK_COMPLETE") {
+						$("#users").hide();
+						alert('{LANG.export_complete}');
+						window.location.href = script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=export&step=2';
+					} else {
+						$("#users").hide();
+						alert(response);
+						window.location.href = script_name + '?' + nv_name_variable + '=' + nv_module_name;
+					}
+				}
+			});
+		}
+	
+	
+		$("input[name=data_export]").click(function() {
+			$("input[name=data_export]").attr("disabled", "disabled");
+			$('#users').html('<center>{LANG.export_note}<br /><br /><img src="{NV_BASE_SITEURL}images/load_bar.gif" alt="" /></center>');
+			nv_data_export(1);
+		});
+	</script>
+	
 <!-- END: hocsinh -->
 <!-- BEGIN: giaovien -->
 code trang giao vien
