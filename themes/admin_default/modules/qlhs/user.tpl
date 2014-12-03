@@ -15,6 +15,32 @@
     </div>
     <div id="tabscontent">
       <div class="tabpage" id="tabpage_1">
+      		
+				
+					<form class="form-inline" id="searchhs" action="{FORM_ACTION}" method="get">
+						<input name="{NV_NAME_VARIABLE}" type="hidden" value="{MODULE_NAME}" />
+						<input name="{NV_OP_VARIABLE}" type="hidden" value="{OP}" />
+						<input name="hs" type="hidden" value="" />
+						<span><strong>{LANG.search_typehs}:</strong></span>
+						<select class="form-control" name="method" id="f_method">
+							<option value="">---</option>
+							<!-- BEGIN: method -->
+							<option value="{METHODS.key}"{METHODS.selected}>{METHODS.value}</option>
+							<!-- END: method -->
+						</select>
+						<input class="form-control" type="text" name="value" id="f_value" value="{SEARCH_VALUE}" />
+						<select class="form-control" name="usactive">
+							<!-- BEGIN: usactive -->
+							<option value="{USACTIVE.key}"{USACTIVE.selected}>{USACTIVE.value}</option>
+							<!-- END: usactive -->
+						</select>
+						<input class="btn btn-primary" name="search" type="submit" value="{LANG.submit}" />
+						<p>
+							{LANG.search_note}
+						</p>
+					</form>
+				
+			
 			<div id="hocsinh" >	
 			</div>
       </div>
@@ -40,19 +66,34 @@
  
 	<script type="text/javascript">
 		//<![CDATA[
-		$(function() {
-		  $('#hocsinh').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&hs');
-		  $('#hocsinh').show();
-		  $('#giaovien').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gv');
-		  $('#giaovien').show();
-		  $('#gvcn').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gvcn');
-		  $('#gvcn').show();
-		  $('#gvbm').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gvbm');
-		  $('#gvbm').show();
-		  $('#add').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user_add');
-		  $('#add').show();
-		});
-
+			$(function() {
+			  $('#hocsinh').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&hs');
+			  $('#hocsinh').show();
+			   $('#user').show();
+			  $('#giaovien').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gv');
+			  $('#giaovien').show();
+			  $('#gvcn').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gvcn');
+			  $('#gvcn').show();
+			  $('#gvbm').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user&gvbm');
+			  $('#gvbm').show();
+			  $('#add').load('{NV_BASE_SITEURL}admin/index.php?nv=qlhs&op=user_add');
+			  $('#add').show();
+			});
+			var form = $('#searchhs');
+		    form.submit(function () {
+				
+			     $.ajax({
+				     url:form.attr('action'),
+				     data: $("#searchhs").serialize(),
+				     success: function (data) {
+				            
+				           
+				            $('#hocsinh').html(data);
+				            
+				    }
+				});
+			     return false;
+		    });
 		//]]>
 	</script> 
 	<style tupe="text/css">
@@ -61,44 +102,21 @@
 		#gvcn{display:block !important;}
 		#gvbm{display:block !important;}
 		#add{display:block !important;}
+		#user{display:block !important;}
 	</style>	
 
 	
 <!-- END: main -->
 <!-- BEGIN: hocsinh -->
 	<div id="users">
-		<!-- BEGIN: is_forum -->
-		<div class="alert alert-warning">{LANG.modforum}</div>
-		<!-- END: is_forum -->
-		<div style="padding-top:10px;">
-			<form class="form-inline" action="{FORM_ACTION}" method="get">
-				<input name="{NV_NAME_VARIABLE}" type="hidden" value="{MODULE_NAME}" />
-				<span><strong>{LANG.search_type}:</strong></span>
-				<select class="form-control" name="method" id="f_method">
-					<option value="">---</option>
-					<!-- BEGIN: method -->
-					<option value="{METHODS.key}"{METHODS.selected}>{METHODS.value}</option>
-					<!-- END: method -->
-				</select>
-				<input class="form-control" type="text" name="value" id="f_value" value="{SEARCH_VALUE}" />
-				<select class="form-control" name="usactive">
-					<!-- BEGIN: usactive -->
-					<option value="{USACTIVE.key}"{USACTIVE.selected}>{USACTIVE.value}</option>
-					<!-- END: usactive -->
-				</select>
-				<input class="btn btn-primary" name="search" type="submit" value="{LANG.submit}" />
-				<p>
-					{LANG.search_note}
-				</p>
-			</form>
-		</div>
+		
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover">
 				<caption><em class="fa fa-file-text-o">&nbsp;</em>{TABLE_CAPTION}</caption>
 				<thead>
 					<tr>
 						<!-- BEGIN: head_td -->
-						<th><a href="{HEAD_TD.href}">{HEAD_TD.title}</a></th>
+						<th>{HEAD_TD.title}</th>
 						<!-- END: head_td -->
 						<td class="text-center"><strong>{LANG.memberlist_active}</th>
 						<th>{LANG.funcs}</th>
@@ -171,6 +189,7 @@
 			$('#users').html('<center>{LANG.export_note}<br /><br /><img src="{NV_BASE_SITEURL}images/load_bar.gif" alt="" /></center>');
 			nv_data_export(1);
 		});
+		
 	</script>
 	
 <!-- END: hocsinh -->

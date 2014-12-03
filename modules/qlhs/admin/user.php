@@ -32,24 +32,14 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 	$base_url = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&usactive=' . $usactive;
 	
 	$methods = array(
-		'userid' => array(
-			'key' => 'userid',
-			'value' => $lang_module['search_id'],
-			'selected' => ''
-		),
 		'username' => array(
 			'key' => 'username',
-			'value' => $lang_module['search_account'],
+			'value' => $lang_module['search_accounths'],
 			'selected' => ''
 		),
 		'full_name' => array(
 			'key' => 'full_name',
-			'value' => $lang_module['search_name'],
-			'selected' => ''
-		),
-		'email' => array(
-			'key' => 'email',
-			'value' => $lang_module['search_mail'],
+			'value' => $lang_module['search_namehs'],
 			'selected' => ''
 		)
 	);
@@ -81,7 +71,7 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 			$methods[$method]['selected'] = ' selected="selected"';
 		}
 		$base_url .= '&amp;method=' . urlencode( $method ) . '&amp;value=' . urlencode( $methodvalue );
-		$table_caption = $lang_module['search_page_title'];
+		$table_caption = $lang_module['dshs'];
 	}
 	
 	$page = $nv_Request->get_int( 'page', 'get', 1 );
@@ -91,7 +81,14 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 	
 	$num_items = $db->query( $sql )->fetchColumn();
 	
+	if( ! empty( $orderby ) and in_array( $orderby, $orders ) )
+	{
+	$_where .= " ORDER BY u.". $orderby . " " . $ordertype;
+	
+	}
+	
 	$sql = 'SELECT * FROM ' . NV_USERS_GLOBALTABLE . ' u, ' . NV_USERS_GLOBALTABLE . '_info ui WHERE ' . $_where . ' LIMIT 0,30';
+	$sqldanhsach=$sql;
 	$result2 = $db->query( $sql );
 	
 	$users_list = array();
@@ -179,26 +176,31 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 
 	$head_tds = array();
 	$head_tds['userid']['title'] = $lang_module['userid'];
-	$head_tds['userid']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=userid&amp;sorttype=ASC';
+	$head_tds['userid']['ordertype'] = 'userid';
+	$head_tds['userid']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=userid&amp;sorttype=ASC';
 	$head_tds['username']['title'] = $lang_module['account'];
-	$head_tds['username']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=username&amp;sorttype=ASC';
+	$head_tds['username']['ordertype'] = 'username';
+	$head_tds['username']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=username&amp;sorttype=ASC';
 	$head_tds['full_name']['title'] = $lang_module['name'];
-	$head_tds['full_name']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=full_name&amp;sorttype=ASC';
+	$head_tds['full_name']['ordertype'] = 'full_name';
+	$head_tds['full_name']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=full_name&amp;sorttype=ASC';
 	$head_tds['email']['title'] = $lang_module['email'];
-	$head_tds['email']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=email&amp;sorttype=ASC';
+	$head_tds['email']['ordertype'] = 'email';
+	$head_tds['email']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=email&amp;sorttype=ASC';
 	$head_tds['regdate']['title'] = $lang_module['register_date'];
-	$head_tds['regdate']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=regdate&amp;sorttype=ASC';
+	$head_tds['regdate']['ordertype'] = 'regdate';
+	$head_tds['regdate']['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=regdate&amp;sorttype=ASC';
 	
 	foreach( $orders as $order )
 	{
 		if( $orderby == $order and $ordertype == 'ASC' )
 		{
-			$head_tds[$order]['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=' . $order . '&amp;sorttype=DESC';
+			$head_tds[$order]['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=' . $order . '&amp;sorttype=DESC';
 			$head_tds[$order]['title'] .= ' &darr;';
 		}
 		elseif( $orderby == $order and $ordertype == 'DESC' )
 		{
-			$head_tds[$order]['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;sortby=' . $order . '&amp;sorttype=ASC';
+			$head_tds[$order]['href'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name .'&amp;' . NV_OP_VARIABLE . '=user&amp;hs'. '&amp;sortby=' . $order . '&amp;sorttype=ASC';
 			$head_tds[$order]['title'] .= ' &uarr;';
 		}
 	}
@@ -206,6 +208,7 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 		$xtpl=new XTemplate($op.".tpl",NV_ROOTDIR."/themes/".$global_config['module_theme']."/modules/".$module_file);
 		$xtpl->assign('LANG',$lang_module);
 		$xtpl->assign('GLANG',$lang_global);
+		
 		$xtpl->assign('NV_BASE_SITEURL',NV_BASE_SITEURL);
 		$xtpl->assign('MODULE_URL',NV_BASE_ADMINURL."index.php?".NV_NAME_VARIABLE."=".$module_name."&".NV_OP_VARIABLE);
 		$xtpl->assign('OP',$op);
@@ -213,22 +216,7 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 		$xtpl->assign( 'MODULE_NAME', $module_name );
 		$xtpl->assign( 'SORTURL', NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
 		$xtpl->assign( 'TABLE_CAPTION', $table_caption );
-		foreach( $methods as $m )
-		{
-			$xtpl->assign( 'METHODS', $m );
-			$xtpl->parse( 'hocsinh.method' );
-		}
-		$_bg = ( defined( 'NV_CONFIG_DIR' ) ) ? 3 : 1;
-		for( $i = $_bg; $i >= 0; $i-- )
-		{
-			$m = array(
-				'key' => $i,
-				'selected' => ( $i == $usactive ) ? 'selected="selected"' : '',
-				'value' => $lang_module['usactive_' . $i]
-			);
-			$xtpl->assign( 'USACTIVE', $m );
-			$xtpl->parse( 'hocsinh.usactive' );
-		}
+		
 		
 		foreach( $head_tds as $head_td )
 		{
@@ -273,7 +261,7 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 			$xtpl->parse( 'hocsinh.exportfile' );
 		}
 		$xtpl->parse('hocsinh');
-		$contents=$xtpl->text('hocsinh');
+		$contents=$xtpl->text('hocsinh').$sqldanhsachorder;
 	}
 
 
@@ -316,18 +304,93 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 	
 	echo $contents;
 }else {
-$xtpl=new XTemplate($op.".tpl",NV_ROOTDIR."/themes/".$global_config['module_theme']."/modules/".$module_file);
-$xtpl->assign('LANG',$lang_module);
-$xtpl->assign('GLANG',$lang_global);
-$xtpl->assign('NV_BASE_SITEURL',NV_BASE_SITEURL);
-$xtpl->assign('MODULE_URL',NV_BASE_ADMINURL."index.php?".NV_NAME_VARIABLE."=".$module_name."&".NV_OP_VARIABLE);
-$xtpl->assign('OP',$op);
-
-$xtpl->parse('main');
-$contents=$xtpl->text('main');
-include (NV_ROOTDIR . "/includes/header.php");
-echo nv_admin_theme($contents);
-include (NV_ROOTDIR . "/includes/footer.php");
+	
+	$usactive_old = $nv_Request->get_int( 'usactive', 'cookie', 3 );
+	$usactive = $nv_Request->get_int( 'usactive', 'post,get', $usactive_old );
+	if( $usactive_old != $usactive )
+	{
+		$nv_Request->set_Cookie( 'usactive', $usactive );
+	}
+	$_where = 'u.userid=ui.userid AND ui.AccType=2 AND u.active=' . ( $usactive % 2 );
+	if( $usactive > 1 )
+	{
+		$_where .= ' AND (u.idsite=' . $global_config['idsite'] .' OR u.userid = ' . $admin_info['admin_id'] . ')';
+	}
+	
+	$base_url = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&usactive=' . $usactive;
+	
+	$methods = array(
+		'username' => array(
+			'key' => 'username',
+			'value' => $lang_module['search_accounths'],
+			'selected' => ''
+		),
+		'full_name' => array(
+			'key' => 'full_name',
+			'value' => $lang_module['search_namehs'],
+			'selected' => ''
+		)
+	);
+	
+	$method = $nv_Request->isset_request( 'method', 'post' ) ? $nv_Request->get_string( 'method', 'post', '' ) : ( $nv_Request->isset_request( 'method', 'get' ) ? urldecode( $nv_Request->get_string( 'method', 'get', '' ) ) : '' );
+	$methodvalue = $nv_Request->isset_request( 'value', 'post' ) ? $nv_Request->get_string( 'value', 'post' ) : ( $nv_Request->isset_request( 'value', 'get' ) ? urldecode( $nv_Request->get_string( 'value', 'get', '' ) ) : '' );
+	
+	$orders = array( 'userid', 'username', 'full_name', 'email', 'regdate' );
+	$orderby = $nv_Request->get_string( 'sortby', 'get', 'userid' );
+	$ordertype = $nv_Request->get_string( 'sorttype', 'get', 'DESC' );
+	if( $ordertype != 'ASC' ) $ordertype = 'DESC';
+	$method = ( ! empty( $method ) and isset( $methods[$method] ) ) ? $method : '';
+	
+	if( ! empty( $methodvalue ) )
+	{
+		if( empty( $method ) )
+		{
+			$key_methods = array_keys( $methods );
+			$array_like = array();
+			foreach( $key_methods as $method_i )
+			{
+				$array_like[] = $method_i . " LIKE '%" . $db->dblikeescape( $methodvalue ) . "%'";
+			}
+			$_where .= ' AND (' . implode( ' OR ', $array_like ) . ')';
+		}
+		else
+		{
+			$_where .= " AND (" . $method . " LIKE '%" . $db->dblikeescape( $methodvalue ) . "%')";
+			$methods[$method]['selected'] = ' selected="selected"';
+		}
+		$base_url .= '&amp;method=' . urlencode( $method ) . '&amp;value=' . urlencode( $methodvalue );
+		$table_caption = $lang_module['search_page_title'];
+	}
+	$xtpl=new XTemplate($op.".tpl",NV_ROOTDIR."/themes/".$global_config['module_theme']."/modules/".$module_file);
+	$xtpl->assign('LANG',$lang_module);
+	$xtpl->assign('GLANG',$lang_global);
+	$xtpl->assign( 'FORM_ACTION', NV_BASE_ADMINURL . 'index.php' );
+	$xtpl->assign('NV_BASE_SITEURL',NV_BASE_SITEURL);
+	$xtpl->assign( 'MODULE_NAME', $module_name );
+	$xtpl->assign('NV_OP_VARIABLE',NV_OP_VARIABLE);
+	$xtpl->assign('MODULE_URL',NV_BASE_ADMINURL."index.php?".NV_NAME_VARIABLE."=".$module_name."&".NV_OP_VARIABLE);
+	$xtpl->assign('OP',$op);
+	foreach( $methods as $m )
+	{
+		$xtpl->assign( 'METHODS', $m );
+		$xtpl->parse( 'main.method' );
+	}
+	$_bg = ( defined( 'NV_CONFIG_DIR' ) ) ? 3 : 1;
+	for( $i = $_bg; $i >= 0; $i-- )
+	{
+		$m = array(
+			'key' => $i,
+			'selected' => ( $i == $usactive ) ? 'selected="selected"' : '',
+			'value' => $lang_module['usactive_' . $i]
+		);
+		$xtpl->assign( 'USACTIVE', $m );
+		$xtpl->parse( 'main.usactive' );
+	}
+	$xtpl->parse('main');
+	$contents=$xtpl->text('main');
+	include (NV_ROOTDIR . "/includes/header.php");
+	echo nv_admin_theme($contents);
+	include (NV_ROOTDIR . "/includes/footer.php");
 
 }
 
