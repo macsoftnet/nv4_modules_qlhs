@@ -88,7 +88,6 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 	}
 	
 	$sql = 'SELECT * FROM ' . NV_USERS_GLOBALTABLE . ' u, ' . NV_USERS_GLOBALTABLE . '_info ui WHERE ' . $_where . ' LIMIT 0,30';
-	$sqldanhsach=$sql;
 	$result2 = $db->query( $sql );
 	
 	$users_list = array();
@@ -261,7 +260,7 @@ if($nv_Request->isset_request('hs','get') OR $nv_Request->isset_request('gv','ge
 			$xtpl->parse( 'hocsinh.exportfile' );
 		}
 		$xtpl->parse('hocsinh');
-		$contents=$xtpl->text('hocsinh').$sqldanhsachorder;
+		$contents=$xtpl->text('hocsinh');
 	}
 
 
